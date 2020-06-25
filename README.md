@@ -1,8 +1,9 @@
 ![logo](https://raw.githubusercontent.com/mariadb-corporation/mariadb-community-columnstore-docker/master/MDB-HLogo_RGB.jpg)
 
-# MariaDB 10.5 Community Server (with ColumnStore 1.5)
+# MariaDB 10.5 Community Server
+##(with ColumnStore 1.5)
 
-## Introduction
+### Introduction
 
 MariaDB Server is one of the most popular database servers in the world. It’s made by the original developers of MySQL and guaranteed to stay open source. Notable users include Wikipedia, WordPress.com and Google.
 
@@ -16,7 +17,7 @@ Earlier versions of ColumnStore have been available to the open source community
 
 This docker image will startup a single server instance of MariaDB 10.5 (with ColumnStore) running on CentOS 8.
 
-## Run Single Instance Container
+### Run Single Instance Container
 
 **Example 1**: To run with ColumnStore engine only and S3 object storage (storagemanager):
 ```
@@ -35,15 +36,15 @@ docker run -d -p 3306:3306 \
 docker run -d -p 3306:3306 --name mcs_container mariadb/columnstore
 ```
 
-## To Enter Container
+### To Enter Container
 ```
 docker exec -it mcs_container bash
 ```
 
-## Customization
+### Customization
 The following environment variables can be utilized to configure behavior:
 
-### S3 Settings
+#### S3 Settings
 * USE_S3_STORAGE: Set to 1 to enable S3 storagemanager. (Default 0)
 * S3_BUCKET: Your S3 bucket name
 * S3_ENDPOINT: Your endpoint url
@@ -51,5 +52,5 @@ The following environment variables can be utilized to configure behavior:
 * S3_SECRET_ACCESS_KEY: Your S3 access key
 * ASYNC_CONN: Set to 1 if using home broadband with storagemanager. (Default 0)
 
-### Other Settings
+#### Other Settings
 * ANALYTICS_ONLY: Set to 1 to only allow Columnstore tables. (Default 0)
