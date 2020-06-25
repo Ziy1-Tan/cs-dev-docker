@@ -18,7 +18,7 @@ This docker image will startup a single server instance of MariaDB 10.5 (with Co
 
 ## Run Single Instance Container
 
-**Example 1**: To run with S3 storage and analytics only
+**Example 1**: To run with ColumnStore engine only and S3 object storage (storagemanager):
 ```
 docker run -d -p 3306:3306 \
 -e ANALYTICS_ONLY=1 \
@@ -30,7 +30,7 @@ docker run -d -p 3306:3306 \
 --name mcs_container mariadb/columnstore
 ```
 
-**Example 2**: To run with local storage and all engines
+**Example 2**: To run with all engines and local storage:
 ```
 docker run -d -p 3306:3306 --name mcs_container mariadb/columnstore
 ```
