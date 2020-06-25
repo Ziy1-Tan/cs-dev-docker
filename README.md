@@ -1,7 +1,7 @@
 ![logo](https://raw.githubusercontent.com/mariadb-corporation/mariadb-community-columnstore-docker/master/MDB-HLogo_RGB.jpg)
 
 # MariaDB 10.5 Community Server
-##(with ColumnStore 1.5)
+## (with ColumnStore 1.5)
 
 ### Introduction
 
