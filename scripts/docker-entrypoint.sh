@@ -6,6 +6,7 @@ function exitColumnStore {
   /usr/bin/monit quit
 }
 
+rm -f /var/run/monit.pid
 rm -f /var/run/syslogd.pid
 rsyslogd
 
