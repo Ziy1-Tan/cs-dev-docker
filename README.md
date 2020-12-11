@@ -36,9 +36,38 @@ docker run -d -p 3306:3306 \
 --name mcs_container mariadb/columnstore
 ```
 
-### To Enter Container
+### To Use MariaDB Inside The Container
+
+Launch bash in the container:
+
 ```
 docker exec -it mcs_container bash
+```
+
+Launch the MariaDB client in the container:
+
+```
+docker exec -it mariacol mariadb
+```
+
+### To Access DB From Host or Other Containers
+
+First, create a container. Add -d if you don't want to observe its output.
+
+```
+docker run -p 3306:3306 --name mcs_container mariadb/columnstore
+```
+
+Create a user for example like so:
+
+```
+docker exec mcs_container mariadb -e "GRANT ALL PRIVILEGES ON *.* TO '<username>'@'%' IDENTIFIED BY '<password>';"
+```
+
+Now you can connect from outside the container - for instance with the MariaDB client from the host:
+
+```
+mariadb --protocol tcp --host localhost -u <username> --password=<password>
 ```
 
 ### Customization
