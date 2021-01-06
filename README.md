@@ -1,7 +1,7 @@
 ![logo](https://raw.githubusercontent.com/mariadb-corporation/mariadb-community-columnstore-docker/master/MDB-HLogo_RGB.jpg)
 
 # MariaDB 10.5 Community Server
-## (with ColumnStore 1.5)
+## (with ColumnStore 5.x)
 
 ### Introduction
 
@@ -11,9 +11,9 @@ MariaDB turns data into structured information in a wide array of applications, 
 
 MariaDB is developed as open source software and as a relational database it provides an SQL interface for accessing data. The latest versions of MariaDB also include GIS and JSON features.
 
-ColumnStore 1.5 brings a high-performance, open source, distributed, SQL-compatible analytics solution to the market. Included as a pluggable storage engine with MariaDB Community Server 10.5, ColumnStore 1.5 is a columnar storage engine that enables customers to easily perform fast and scalable analytics.
+ColumnStore 5.x brings a high-performance, open source, distributed, SQL-compatible analytics solution to the market. Included as a pluggable storage engine with MariaDB Community Server 10.5, ColumnStore 5.x is a columnar storage engine that enables customers to easily perform fast and scalable analytics.
 
-Earlier versions of ColumnStore have been available to the open source community as a separate fork of MariaDB, but with the 1.5 release, ColumnStore is now fully integrated into the MariaDB stack and has been significantly upgraded from previous versions. It is easier to install and manage, data loading is among the fastest in the industry, and it works with cost-effective cloud-native object storage.
+Earlier versions of ColumnStore have been available to the open source community as a separate fork of MariaDB, but with the 5.x release, ColumnStore is now fully integrated into the MariaDB stack and has been significantly upgraded from previous versions. It is easier to install and manage, data loading is among the fastest in the industry, and it works with cost-effective cloud-native object storage.
 
 This docker image will startup a single server instance of MariaDB 10.5 (with ColumnStore) running on CentOS 8.
 
@@ -47,7 +47,7 @@ docker exec -it mcs_container bash
 Launch the MariaDB client in the container:
 
 ```
-docker exec -it mariacol mariadb
+docker exec -it mcs_container mariadb
 ```
 
 ### To Access DB From Host or Other Containers
@@ -74,12 +74,12 @@ mariadb --protocol tcp --host localhost -u <username> --password=<password>
 The following environment variables can be utilized to configure behavior:
 
 #### S3 Settings
-* USE_S3_STORAGE: Set to 1 to enable S3 storagemanager. (Default 0)
-* S3_BUCKET: Your S3 bucket name
-* S3_ENDPOINT: Your endpoint url
-* S3_ACCESS_KEY_ID: Your S3 access id
-* S3_SECRET_ACCESS_KEY: Your S3 access key
-* ASYNC_CONN: Set to 1 if using home broadband with storagemanager. (Default 0)
+*   USE_S3_STORAGE: Set to 1 to enable S3 storagemanager. (Default 0)
+*   S3_BUCKET: Your S3 bucket name
+*   S3_ENDPOINT: Your endpoint url
+*   S3_ACCESS_KEY_ID: Your S3 access id
+*   S3_SECRET_ACCESS_KEY: Your S3 access key
+*   ASYNC_CONN: Set to 1 if using home broadband with storagemanager. (Default 0)
 
 #### Other Settings
-* ANALYTICS_ONLY: Set to 1 to only allow Columnstore tables. (Default 0)
+*   ANALYTICS_ONLY: Set to 1 to only allow Columnstore tables. (Default 0)
