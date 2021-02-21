@@ -131,11 +131,8 @@ if [[ $MARIADB_RUNNING == *"alive"* ]]; then
       exit 1
   fi
 else
-  if [ ! [ $(echo $STATUS | grep -q "DML and DDL statements for Columnstore tables can only be run from the replication master.") -o \
-           $(echo $STATUS | grep -q "ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)") ] ]; then
-            echo "ERROR $STATUS: CEJ user creation was not successful."
-            exit 1
-  fi
+  echo "ERROR $STATUS: CEJ user creation was not successful."
+  exit 1
 fi
 
 # Stop System
