@@ -3,7 +3,6 @@
 # Set Variables
 IFLAG=/etc/columnstore/container-initialized
 LOG_PREFIX=/var/log/mariadb/columnstore
-MCS_INSTALL_PATH=/var/lib/columnstore
 MCS_INSTALL_BIN=/usr/bin
 PROGS='StorageManager load_brm workernode controllernode PrimProc ExeMgr DMLProc DDLProc WriteEngineServer'
 JEMALLOC_PATH="/usr/lib64/libjemalloc.so.2"

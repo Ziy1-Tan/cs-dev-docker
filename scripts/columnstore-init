@@ -141,7 +141,7 @@ if  [[ ! -z $(pidof $PROGS) ]]; then
    $MCS_INSTALL_BIN/save_brm
 
    echo Sending SIGTERM to Columnstore processes
-   kill "$(pidof $PROGS)" > /dev/null
+   kill $(pidof $PROGS) > /dev/null
    sleep 3
    counter=1
    while [ -n "$(pidof StorageManager)" ] && [ $counter -le 60 ]
@@ -150,7 +150,7 @@ if  [[ ! -z $(pidof $PROGS) ]]; then
      ((counter++))
    done
    echo Sending SIGKILL to ColumnStore processes
-   kill -9 "$(pidof $PROGS)" > /dev/null
+   kill -9 $(pidof $PROGS) > /dev/null
 fi
 
 echo Clearing shared memory

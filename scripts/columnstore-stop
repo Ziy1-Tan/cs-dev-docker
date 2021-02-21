@@ -17,7 +17,7 @@ if  [[ ! -z $(pidof $PROGS) ]]; then
    sleep 3
    # Make sure StorageManager had a chance to shutdown clean
    counter=1
-   while [ -n "$(pidof StorageManager)" -a $counter -le 60 ]
+   while [ -n "$(pidof StorageManager)" ] && [ $counter -le 60 ]
    do
      sleep 1
      ((counter++))
