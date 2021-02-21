@@ -6,15 +6,12 @@ ANALYTICS_ONLY="${ANALYTICS_ONLY:-0}"
 USE_S3_STORAGE="${USE_S3_STORAGE:-0}"
 CAP_PCT=95 #Leave overhead for other Docker host processes
 MAX_RAM=$(free -m | awk 'NR==2{printf "%d", $2*.'$CAP_PCT' }')
-SERVER_ID=$(hostname -i | cut -d "." -f 4)
-SERVER_SUBNET=$(hostname -i | cut -d "." -f 1-3 -s)
 TOTALUMMEMORY=$( echo $MAX_RAM / 4  | bc )M
 NUMBLOCKSPCT=$( echo $MAX_RAM / 2  | bc )M
 IFLAG=/etc/columnstore/container-initialized
 JEMALLOC_PATH="/usr/lib64/libjemalloc.so.2"
 LOG_PREFIX=/var/log/mariadb/columnstore
 MCS_INSTALL_BIN=/usr/bin
-MCS_INSTALL_PATH=/var/lib/columnstore
 PROGS='StorageManager load_brm workernode controllernode PrimProc ExeMgr DMLProc DDLProc WriteEngineServer'
 export LD_PRELOAD=$JEMALLOC_PATH
 export > /etc/envvars
@@ -131,7 +128,7 @@ if [[ $MARIADB_RUNNING == *"alive"* ]]; then
       exit 1
   fi
 else
-  echo "ERROR $STATUS: CEJ user creation was not successful."
+  echo "ERROR: MariaDB is not running."
   exit 1
 fi
 
@@ -144,16 +141,16 @@ if  [[ ! -z $(pidof $PROGS) ]]; then
    $MCS_INSTALL_BIN/save_brm
 
    echo Sending SIGTERM to Columnstore processes
-   kill $(pidof $PROGS) > /dev/null
+   kill "$(pidof $PROGS)" > /dev/null
    sleep 3
    counter=1
-   while [ -n "$(pidof StorageManager)" -a $counter -le 60 ]
+   while [ -n "$(pidof StorageManager)" ] && [ $counter -le 60 ]
    do
      sleep 1
      ((counter++))
    done
    echo Sending SIGKILL to ColumnStore processes
-   kill -9 $(pidof $PROGS) > /dev/null
+   kill -9 "$(pidof $PROGS)" > /dev/null
 fi
 
 echo Clearing shared memory
