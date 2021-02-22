@@ -1,15 +1,13 @@
 # vim:set ft=dockerfile:
 FROM centos:8
 
-# Add MariaDB Community Repo
+# Prepare Image
 RUN dnf -y install wget && \
     wget -O /tmp/mariadb_repo_setup https://downloads.mariadb.com/MariaDB/mariadb_repo_setup && \
     chmod +x /tmp/mariadb_repo_setup && \
-    ./tmp/mariadb_repo_setup --mariadb-server-version=mariadb-10.5
-
-# Update system
-RUN dnf -y install epel-release && \
-    dnf -y upgrade
+    ./tmp/mariadb_repo_setup --mariadb-server-version=mariadb-10.5 && \
+    dnf -y install epel-release && \
+    dnf -y upgrade --refresh
 
 # Install some basic dependencies
 RUN dnf -y install bind-utils \
