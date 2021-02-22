@@ -2,7 +2,8 @@
 FROM centos:8
 
 # Add MariaDB Community Repo
-RUN wget -O /tmp/mariadb_repo_setup https://downloads.mariadb.com/MariaDB/mariadb_repo_setup && \
+RUN dnf -y install wget && \
+    wget -O /tmp/mariadb_repo_setup https://downloads.mariadb.com/MariaDB/mariadb_repo_setup && \
     chmod +x /tmp/mariadb_repo_setup && \
     ./tmp/mariadb_repo_setup --mariadb-server-version=mariadb-10.5
 
@@ -30,8 +31,7 @@ RUN dnf -y install bind-utils \
     snappy \
     sudo \
     tcl \
-    vim \
-    wget
+    vim
 
 # Default env variables
 ENV LC_ALL en_US.UTF-8
