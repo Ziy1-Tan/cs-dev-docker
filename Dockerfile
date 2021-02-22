@@ -1,6 +1,11 @@
 # vim:set ft=dockerfile:
 FROM centos:8
 
+# Add MariaDB Community Repo
+RUN wget -O /tmp/mariadb_repo_setup https://downloads.mariadb.com/MariaDB/mariadb_repo_setup && \
+    chmod +x /tmp/mariadb_repo_setup && \
+    ./tmp/mariadb_repo_setup --mariadb-server-version=mariadb-10.5
+
 # Update system
 RUN dnf -y install epel-release && \
     dnf -y upgrade
@@ -33,11 +38,6 @@ ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 ENV TINI_VERSION=v0.18.0
-
-# Add MariaDB Community Repo
-RUN wget -O /tmp/mariadb_repo_setup https://downloads.mariadb.com/MariaDB/mariadb_repo_setup && \
-    chmod +x /tmp/mariadb_repo_setup && \
-    ./tmp/mariadb_repo_setup --mariadb-server-version=mariadb-10.5
 
 # Add Tini Init Process
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /usr/bin/tini
