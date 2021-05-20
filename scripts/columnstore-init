@@ -112,7 +112,7 @@ if [[ $MARIADB_RUNNING == *"alive"* ]]; then
         [[ $CEJ_PASSWORD != *=* ]]; do
           CEJ_PASSWORD="$(openssl rand -base64 20)"
   done
-  $MCS_INSTALL_BIN/mariadb -e "GRANT SELECT ON *.* TO 'cej'@'127.0.0.1' IDENTIFIED BY '$CEJ_PASSWORD';"
+  $MCS_INSTALL_BIN/mariadb -e "GRANT SELECT, PROCESS ON *.* TO 'cej'@'127.0.0.1' IDENTIFIED BY '$CEJ_PASSWORD';"
   if [ $? -ne 0 ]; then
       echo "ERROR: During cross engine join user creation."
       exit 1
