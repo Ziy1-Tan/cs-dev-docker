@@ -1,5 +1,5 @@
 # vim:set ft=dockerfile:
-FROM centos:8
+FROM rockylinux/rockylinux:8
 
 # Prepare Image
 RUN dnf -y install wget && \
@@ -59,6 +59,7 @@ RUN chmod +x /usr/bin/tini \
     /usr/bin/columnstore-start \
     /usr/bin/columnstore-stop \
     /usr/bin/columnstore-restart && \
+    touch /etc/columnstore/cmapi_server.conf && \
     sed -i 's|set daemon\s.30|set daemon 5|g' /etc/monitrc && \
     sed -i 's|#.*with start delay\s.*240|  with start delay 60|g' /etc/monitrc
 
