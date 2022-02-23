@@ -1,7 +1,7 @@
 ![logo](https://raw.githubusercontent.com/mariadb-corporation/mariadb-community-columnstore-docker/master/MDB-HLogo_RGB.jpg)
 
-# MariaDB 10.5 Community Server
-## (with ColumnStore 5.x)
+# MariaDB 10.6 Community Server
+## (with ColumnStore 6.x)
 
 ### Introduction
 
@@ -11,11 +11,11 @@ MariaDB turns data into structured information in a wide array of applications, 
 
 MariaDB is developed as open source software and as a relational database it provides an SQL interface for accessing data. The latest versions of MariaDB also include GIS and JSON features.
 
-ColumnStore 5.x brings a high-performance, open source, distributed, SQL-compatible analytics solution to the market. Included as a pluggable storage engine with MariaDB Community Server 10.5, ColumnStore 5.x is a columnar storage engine that enables customers to easily perform fast and scalable analytics.
+ColumnStore 6.x brings a high-performance, open source, distributed, SQL-compatible analytics solution to the market. Included as a pluggable storage engine with MariaDB Community Server 10.6, ColumnStore 6.x is a columnar storage engine that enables customers to easily perform fast and scalable analytics.
 
-Earlier versions of ColumnStore have been available to the open source community as a separate fork of MariaDB, but with the 5.x release, ColumnStore is now fully integrated into the MariaDB stack and has been significantly upgraded from previous versions. It is easier to install and manage, data loading is among the fastest in the industry, and it works with cost-effective cloud-native object storage.
+Earlier versions of ColumnStore have been available to the open source community as a separate fork of MariaDB, but with the 6.x release, ColumnStore is now fully integrated into the MariaDB stack and has been significantly upgraded from previous versions. It is easier to install and manage, data loading is among the fastest in the industry, and it works with cost-effective cloud-native object storage.
 
-This docker image will startup a single server instance of MariaDB 10.5 (with ColumnStore) running on CentOS 8.
+This docker image will startup a single server instance of MariaDB 10.6 (with ColumnStore) running on Rocky Linux 8.
 
 ### Run Single Instance Container
 

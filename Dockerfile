@@ -5,7 +5,7 @@ FROM rockylinux/rockylinux:8
 RUN dnf -y install wget && \
     wget -O /tmp/mariadb_repo_setup https://downloads.mariadb.com/MariaDB/mariadb_repo_setup && \
     chmod +x /tmp/mariadb_repo_setup && \
-    ./tmp/mariadb_repo_setup --mariadb-server-version=mariadb-10.5 && \
+    ./tmp/mariadb_repo_setup --mariadb-server-version=mariadb-10.6 && \
     dnf -y install epel-release && \
     dnf -y upgrade --refresh
 
@@ -24,10 +24,10 @@ RUN dnf -y install bind-utils \
     openssl \
     perl \
     perl-DBI \
+    procps-ng \
     python3 \
     rsyslog \
     snappy \
-    sudo \
     tcl \
     vim
 
@@ -49,9 +49,9 @@ RUN dnf -y install \
 COPY config/monit.d/ /etc/monit.d/
 
 COPY scripts/columnstore-init \
-     scripts/columnstore-start \
-     scripts/columnstore-stop \
-     scripts/columnstore-restart /usr/bin/
+    scripts/columnstore-start \
+    scripts/columnstore-stop \
+    scripts/columnstore-restart /usr/bin/
 
 # Chmod some files
 RUN chmod +x /usr/bin/tini \
