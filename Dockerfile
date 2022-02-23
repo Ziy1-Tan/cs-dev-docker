@@ -16,6 +16,7 @@ RUN dnf -y install bind-utils \
     expect \
     glibc-langpack-en \
     jemalloc \
+    jq \
     less \
     libaio \
     monit \
