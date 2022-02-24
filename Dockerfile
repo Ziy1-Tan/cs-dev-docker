@@ -39,15 +39,19 @@ RUN dnf -y install bind-utils \
 ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
-ENV TINI_VERSION=v0.18.0
+ENV TINI_VERSION=v0.19.0
 
 # Add Tini Init Process
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /usr/bin/tini
 
-# Install MariaDB/ColumnStore packages
+# Install MariaDB packages
 RUN dnf -y install \
-    MariaDB-server \
-    MariaDB-columnstore-engine
+    MariaDB-server && \
+    cp /usr/share/mysql/mysql.server /etc/init.d/mariadb && \
+    /etc/init.d/mariadb start && \
+    mysql_tzinfo_to_sql /usr/share/zoneinfo | mariadb mysql && \
+    /etc/init.d/mariadb stop && \
+    dnf -y install MariaDB-columnstore-engine
 
 # Copy files to image
 COPY config/monit.d/ /etc/monit.d/

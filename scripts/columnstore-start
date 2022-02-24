@@ -63,6 +63,6 @@ touch $LOG_PREFIX/ddlproc.log && chmod 666 $LOG_PREFIX/ddlproc.log
 $MCS_INSTALL_BIN/DDLProc &> $LOG_PREFIX/ddlproc.log &
 echo DDLProc PID = $!
 
-/usr/share/mysql/mysql.server start
+/etc/init.d/mariadb start
 
 exit 0

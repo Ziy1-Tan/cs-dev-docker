@@ -7,7 +7,7 @@ MCS_INSTALL_BIN=/usr/bin
 # Stop System
 echo Stopping...
 
-/usr/share/mysql/mysql.server stop
+/etc/init.d/mariadb stop
 
 if  [[ ! -z $(pidof $PROGS) ]]; then
    $MCS_INSTALL_BIN/save_brm

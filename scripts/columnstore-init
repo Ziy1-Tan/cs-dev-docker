@@ -99,13 +99,10 @@ echo DDLProc PID = $!
 
 $MCS_INSTALL_BIN/dbbuilder 7 &> $LOG_PREFIX/dbbuilder.log
 
-/usr/share/mysql/mysql.server start
+/etc/init.d/mariadb start
 
 MARIADB_RUNNING=$(mariadb-admin ping)
 if [[ $MARIADB_RUNNING == *"alive"* ]]; then
-  # Load Time Zone Data
-  mysql_tzinfo_to_sql /usr/share/zoneinfo | mariadb mysql
-
   # Set Up Cross Engine Join User
   CEJ_PASSWORD="'"
   while [[ $CEJ_PASSWORD != *[[:lower:]]* ]] || \
@@ -138,7 +135,7 @@ fi
 # Stop System
 echo Stopping...
 
-/usr/share/mysql/mysql.server stop
+/etc/init.d/mariadb stop
 
 if  [[ ! -z $(pidof $PROGS) ]]; then
    $MCS_INSTALL_BIN/save_brm
