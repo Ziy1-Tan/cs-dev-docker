@@ -26,11 +26,14 @@ RUN dnf -y install bind-utils \
     perl \
     perl-DBI \
     procps-ng \
-    python3 \
+    redhat-lsb-core \
     rsyslog \
     snappy \
     tcl \
-    vim
+    tzdata \
+    vim && \
+    ln -s /usr/lib/lsb/init-functions /etc/init.d/functions && \
+    rm -rf /usr/share/zoneinfo/tzdata.zi /usr/share/zoneinfo/leapseconds
 
 # Default env variables
 ENV LC_ALL en_US.UTF-8

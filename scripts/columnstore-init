@@ -103,6 +103,9 @@ $MCS_INSTALL_BIN/dbbuilder 7 &> $LOG_PREFIX/dbbuilder.log
 
 MARIADB_RUNNING=$(mariadb-admin ping)
 if [[ $MARIADB_RUNNING == *"alive"* ]]; then
+  # Load Time Zone Data
+  mysql_tzinfo_to_sql /usr/share/zoneinfo | mariadb mysql
+
   # Set Up Cross Engine Join User
   CEJ_PASSWORD="'"
   while [[ $CEJ_PASSWORD != *[[:lower:]]* ]] || \
