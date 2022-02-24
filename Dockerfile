@@ -39,7 +39,7 @@ RUN dnf -y install bind-utils \
 ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
-ENV TINI_VERSION=v0.19.0
+ENV TINI_VERSION=v0.18.0
 
 # Add Tini Init Process
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /usr/bin/tini
@@ -88,6 +88,7 @@ RUN chmod +x /usr/bin/docker-entrypoint.sh && \
 RUN dnf clean all && \
     rm -rf /var/cache/dnf && \
     find /var/log -type f -exec cp /dev/null {} \; && \
+    rm -rf /var/lib/mysql/*.err && \
     cat /dev/null > ~/.bash_history && \
     history -c && \
     sed -i 's|SysSock.Use="off"|SysSock.Use="on"|' /etc/rsyslog.conf && \

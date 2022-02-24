@@ -45,6 +45,10 @@ if [ $ANALYTICS_ONLY -eq 1 ]; then
   echo "" >> /etc/my.cnf.d/columnstore.cnf
   echo "default_storage_engine=Columnstore" >> /etc/my.cnf.d/columnstore.cnf
   echo "enforce_storage_engine=Columnstore" >> /etc/my.cnf.d/columnstore.cnf
+  echo "log_error = /var/log/mariadb/columnstore/mariadb-error.log" >> /etc/my.cnf.d/columnstore.cnf
+else
+  echo "" >> /etc/my.cnf.d/columnstore.cnf
+  echo "log_error = /var/log/mariadb/columnstore/mariadb-error.log" >> /etc/my.cnf.d/columnstore.cnf
 fi
 
 # Verify All Programs Are Available
@@ -141,7 +145,7 @@ if  [[ ! -z $(pidof $PROGS) ]]; then
    $MCS_INSTALL_BIN/save_brm
 
    echo Sending SIGTERM to Columnstore processes
-   kill $(pidof $PROGS) > /dev/null
+   kill $(pidof $PROGS) > /dev/null 2>&1
    sleep 3
    counter=1
    while [ -n "$(pidof StorageManager)" ] && [ $counter -le 60 ]
@@ -150,7 +154,7 @@ if  [[ ! -z $(pidof $PROGS) ]]; then
      ((counter++))
    done
    echo Sending SIGKILL to ColumnStore processes
-   kill -9 $(pidof $PROGS) > /dev/null
+   kill -9 $(pidof $PROGS) > /dev/null 2>&1
 fi
 
 echo Clearing shared memory

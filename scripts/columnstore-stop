@@ -12,20 +12,20 @@ echo Stopping...
 if  [[ ! -z $(pidof $PROGS) ]]; then
    $MCS_INSTALL_BIN/save_brm
 
-   echo Sending SIGTERM
-   kill $(pidof $PROGS) > /dev/null
+   echo Sending SIGTERM To Columnstore Processes
+   kill $(pidof $PROGS) > /dev/null 2>&1
    sleep 3
-   # Make sure StorageManager had a chance to shutdown clean
    counter=1
    while [ -n "$(pidof StorageManager)" ] && [ $counter -le 60 ]
    do
      sleep 1
      ((counter++))
    done
-   echo Sending SIGKILL
-   kill -9 $(pidof $PROGS) > /dev/null
+   echo Sending SIGKILL To ColumnStore Processes
+   kill -9 $(pidof $PROGS) > /dev/null 2>&1
 fi
 
+# Clearing Shared Memory
 echo Clearing shared memory
 $MCS_INSTALL_BIN/clearShm
 
