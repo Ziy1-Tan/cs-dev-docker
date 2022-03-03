@@ -83,3 +83,15 @@ The following environment variables can be utilized to configure behavior:
 
 #### Other Settings
 *   ANALYTICS_ONLY: Set to 1 to only allow Columnstore tables. (Default 0)
+
+#### Build Examples
+
+AMD64/x86_64 (*Default*):
+```
+docker build --rm --tag mariadb/columnstore . --build-arg ARCH=amd64
+```
+
+AARCH64/ARM64:
+```
+docker build --rm --tag mariadb/columnstore . --build-arg ARCH=arm64
+```

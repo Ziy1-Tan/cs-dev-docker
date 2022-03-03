@@ -46,9 +46,13 @@ if [ $ANALYTICS_ONLY -eq 1 ]; then
   echo "default_storage_engine=Columnstore" >> /etc/my.cnf.d/columnstore.cnf
   echo "enforce_storage_engine=Columnstore" >> /etc/my.cnf.d/columnstore.cnf
   echo "log_error = /var/log/mariadb/columnstore/mariadb-error.log" >> /etc/my.cnf.d/columnstore.cnf
+  echo "character_set_server = utf8" >> /etc/my.cnf.d/columnstore.cnf
+  echo "collation_server = utf8_general_ci" >> /etc/my.cnf.d/columnstore.cnf
 else
   echo "" >> /etc/my.cnf.d/columnstore.cnf
   echo "log_error = /var/log/mariadb/columnstore/mariadb-error.log" >> /etc/my.cnf.d/columnstore.cnf
+  echo "character_set_server = utf8" >> /etc/my.cnf.d/columnstore.cnf
+  echo "collation_server = utf8_general_ci" >> /etc/my.cnf.d/columnstore.cnf
 fi
 
 # Verify All Programs Are Available

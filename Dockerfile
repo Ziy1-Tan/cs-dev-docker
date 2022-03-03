@@ -1,11 +1,20 @@
 # vim:set ft=dockerfile:
-FROM rockylinux/rockylinux:8
+FROM rockylinux
+
+# Default env variables
+ENV LC_ALL en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
+
+# Temporary Work Around To Allow ARM64 Builds
+ARG ARCH=amd64
+RUN printf "[mariadb-main]\nname = MariaDB Server\nbaseurl = https://cspkg.s3.amazonaws.com/develop-6/latest/${ARCH}/centos8\ngpgcheck = 0\nenabled = 1\nmodule_hotfixes = 1\n" >> /etc/yum.repos.d/mariadb.repo
 
 # Prepare Image
 RUN dnf -y install wget && \
-    wget -O /tmp/mariadb_repo_setup https://downloads.mariadb.com/MariaDB/mariadb_repo_setup && \
-    chmod +x /tmp/mariadb_repo_setup && \
-    ./tmp/mariadb_repo_setup --mariadb-server-version=mariadb-10.6 && \
+    #    wget -O /tmp/mariadb_repo_setup https://downloads.mariadb.com/MariaDB/mariadb_repo_setup && \
+    #    chmod +x /tmp/mariadb_repo_setup && \
+    #    ./tmp/mariadb_repo_setup --mariadb-server-version=mariadb-10.6 && \
     dnf -y install epel-release && \
     dnf -y upgrade --refresh
 
@@ -35,11 +44,6 @@ RUN dnf -y install bind-utils \
     vim && \
     ln -s /usr/lib/lsb/init-functions /etc/init.d/functions && \
     rm -rf /usr/share/zoneinfo/tzdata.zi /usr/share/zoneinfo/leapseconds
-
-# Default env variables
-ENV LC_ALL en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US.UTF-8
 
 # Install MariaDB packages
 RUN dnf -y install \
