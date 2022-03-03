@@ -30,6 +30,7 @@ RUN dnf -y install bind-utils \
     rsyslog \
     snappy \
     tcl \
+    tini \
     tzdata \
     vim && \
     ln -s /usr/lib/lsb/init-functions /etc/init.d/functions && \
@@ -39,10 +40,6 @@ RUN dnf -y install bind-utils \
 ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
-ENV TINI_VERSION=v0.18.0
-
-# Add Tini Init Process
-ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /usr/bin/tini
 
 # Install MariaDB packages
 RUN dnf -y install \
@@ -62,8 +59,7 @@ COPY scripts/columnstore-init \
     scripts/columnstore-restart /usr/bin/
 
 # Chmod some files
-RUN chmod +x /usr/bin/tini \
-    /usr/bin/columnstore-init \
+RUN chmod +x /usr/bin/columnstore-init \
     /usr/bin/columnstore-start \
     /usr/bin/columnstore-stop \
     /usr/bin/columnstore-restart && \
