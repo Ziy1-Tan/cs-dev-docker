@@ -23,6 +23,10 @@ This docker image will startup a single server instance of MariaDB 10.6 (with Co
 ```
 docker run -d -p 3306:3306 --name mcs_container mariadb/columnstore
 ```
+**Example 1a**: TO run with all engines and local storage on ARM hardware:
+```
+docker run -d -p 3306:3306 --name mcs_container mariadb/columnstore:arm64
+```
 
 **Example 2**: To run with ColumnStore engine only and S3 object storage (storagemanager):
 ```
