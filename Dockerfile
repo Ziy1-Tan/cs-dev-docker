@@ -38,6 +38,7 @@ RUN dnf -y install bind-utils \
     ln -s /usr/lib/lsb/init-functions /etc/init.d/functions && \
     rm -rf /usr/share/zoneinfo/tzdata.zi /usr/share/zoneinfo/leapseconds
 
+# If systemd is not supported
 COPY scripts/columnstore-init \
     scripts/columnstore-start \
     scripts/columnstore-stop \
