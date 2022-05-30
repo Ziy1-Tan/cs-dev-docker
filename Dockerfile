@@ -35,6 +35,7 @@ RUN dnf -y install bind-utils \
     htop \
     policycoreutils \
     mariadb-gssapi-server && \
+    sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" && \
     ln -s /usr/lib/lsb/init-functions /etc/init.d/functions && \
     rm -rf /usr/share/zoneinfo/tzdata.zi /usr/share/zoneinfo/leapseconds
 
@@ -49,9 +50,6 @@ RUN chmod +x /usr/bin/columnstore-init \
     /usr/bin/columnstore-start \
     /usr/bin/columnstore-stop \
     /usr/bin/columnstore-restart
-
-# Expose MariaDB port
-EXPOSE 3306
 
 # Clean system and reduce size
 RUN dnf clean all && \
