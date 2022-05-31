@@ -1,6 +1,10 @@
 # vim:set ft=dockerfile:
 FROM rockylinux
 
+# Timezone
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    echo 'Asia/Shanghai' >/etc/timezone
+
 # Prepare Image
 RUN dnf -y install wget && \
     dnf -y install epel-release && \
@@ -29,6 +33,7 @@ RUN dnf -y install bind-utils \
     tcl \
     tini \
     tzdata \
+    python3 \
     zsh \
     git \
     vim \
@@ -45,11 +50,17 @@ COPY scripts/columnstore-init \
     scripts/columnstore-stop \
     scripts/columnstore-restart /usr/bin/
 
+COPY scripts/pre.sh \
+    scripts/mcs.sh \
+    config/.vimrc /root/
+
 # Chmod some files
 RUN chmod +x /usr/bin/columnstore-init \
     /usr/bin/columnstore-start \
     /usr/bin/columnstore-stop \
-    /usr/bin/columnstore-restart
+    /usr/bin/columnstore-restart \
+    /root/pre.sh \
+    /root/mcs.sh
 
 # Clean system and reduce size
 RUN dnf clean all && \
