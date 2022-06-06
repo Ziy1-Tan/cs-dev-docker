@@ -53,6 +53,7 @@ COPY scripts/columnstore-init \
 COPY scripts/pre.sh \
     scripts/mcs.sh \
     config/.vimrc /root/
+    
 
 # Chmod some files
 RUN chmod +x /usr/bin/columnstore-init \
@@ -60,7 +61,9 @@ RUN chmod +x /usr/bin/columnstore-init \
     /usr/bin/columnstore-stop \
     /usr/bin/columnstore-restart \
     /root/pre.sh \
-    /root/mcs.sh
+    /root/mcs.sh && \
+    ln -s /root/mcs.sh /usr/bin/mcs && \
+    source /etc/profile
 
 # Clean system and reduce size
 RUN dnf clean all && \
