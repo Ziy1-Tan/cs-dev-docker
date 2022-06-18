@@ -41,6 +41,10 @@ RUN dnf -y install bind-utils \
     policycoreutils \
     mariadb-gssapi-server && \
     sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" && \
+    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions && \
+    source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh && \
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting && \
+    source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh && \
     ln -s /usr/lib/lsb/init-functions /etc/init.d/functions && \
     rm -rf /usr/share/zoneinfo/tzdata.zi /usr/share/zoneinfo/leapseconds
 
@@ -53,7 +57,7 @@ COPY scripts/columnstore-init \
 COPY scripts/pre.sh \
     scripts/mcs.sh \
     config/.vimrc /root/
-    
+
 
 # Chmod some files
 RUN chmod +x /usr/bin/columnstore-init \
