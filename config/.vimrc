@@ -35,9 +35,3 @@ nnoremap <leader>h <c-w>h
 nnoremap <leader>j <c-w>j
 nnoremap <leader>k <c-w>k
 nnoremap <leader>l <c-w>l
-
-" copy & paste
-vmap <leader>c "+y
-
-nmap <leader>v "+p
-imap <leader>v <esc>"+p
