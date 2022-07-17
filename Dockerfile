@@ -1,5 +1,5 @@
 # vim:set ft=dockerfile:
-FROM rockylinux
+FROM rockylinux:8.6
 
 # Timezone
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
@@ -41,12 +41,10 @@ RUN dnf -y install bind-utils \
     policycoreutils \
     mariadb-gssapi-server && \
     sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" && \
-    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions && \
-    source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh && \
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting && \
-    source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh && \
     ln -s /usr/lib/lsb/init-functions /etc/init.d/functions && \
-    rm -rf /usr/share/zoneinfo/tzdata.zi /usr/share/zoneinfo/leapseconds
+    rm -rf /usr/share/zoneinfo/tzdata.zi /usr/share/zoneinfo/leapseconds && \
+    git config --global user.name "qggcs" && \                      
+    git config --global user.email "ajb459684460@gmail.com"
 
 # If systemd is not supported
 COPY scripts/columnstore-init \
