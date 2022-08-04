@@ -1,11 +1,11 @@
 # vim:set ft=dockerfile:
-FROM rockylinux:8.6
+FROM rockylinux:8
 
 # Timezone
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo 'Asia/Shanghai' >/etc/timezone
 
-# Prepare Image
+# Prepare image
 RUN dnf -y install wget && \
     dnf -y install epel-release && \
     dnf -y upgrade --refresh
@@ -37,7 +37,6 @@ RUN dnf -y install bind-utils \
     zsh \
     git \
     vim \
-    htop \
     policycoreutils \
     mariadb-gssapi-server && \
     sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" && \
@@ -54,7 +53,9 @@ COPY scripts/columnstore-init \
 
 COPY scripts/pre.sh \
     scripts/mcs.sh \
-    config/.vimrc /root/
+    config/.vimrc \
+    scripts/fn.sh ~/.ssh /root/ 
+     
 
 
 # Chmod some files
@@ -63,8 +64,10 @@ RUN chmod +x /usr/bin/columnstore-init \
     /usr/bin/columnstore-stop \
     /usr/bin/columnstore-restart \
     /root/pre.sh \
-    /root/mcs.sh && \
+    /root/mcs.sh \
+    /root/fn.sh && \
     ln -s /root/mcs.sh /usr/bin/mcs && \
+    ln -s /root/fn.sh /usr/bin/fn && \
     source /etc/profile
 
 # Clean system and reduce size
