@@ -54,8 +54,11 @@ COPY scripts/columnstore-init \
 COPY scripts/pre.sh \
     scripts/mcs.sh \
     config/.vimrc \
-    scripts/fn.sh ~/.ssh /root/ 
-     
+    scripts/fn.sh \
+    scripts/install.sh /root/
+
+COPY .ssh /root/.ssh/ 
+
 
 
 # Chmod some files
@@ -65,7 +68,8 @@ RUN chmod +x /usr/bin/columnstore-init \
     /usr/bin/columnstore-restart \
     /root/pre.sh \
     /root/mcs.sh \
-    /root/fn.sh && \
+    /root/fn.sh \
+    /root/install.sh && \
     ln -s /root/mcs.sh /usr/bin/mcs && \
     ln -s /root/fn.sh /usr/bin/fn && \
     source /etc/profile
