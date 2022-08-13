@@ -39,7 +39,6 @@ RUN dnf -y install bind-utils \
     vim \
     policycoreutils \
     mariadb-gssapi-server && \
-    sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" && \
     ln -s /usr/lib/lsb/init-functions /etc/init.d/functions && \
     rm -rf /usr/share/zoneinfo/tzdata.zi /usr/share/zoneinfo/leapseconds && \
     git config --global user.name "qggcs" && \                      
@@ -72,6 +71,7 @@ RUN chmod +x /usr/bin/columnstore-init \
     /root/install.sh && \
     ln -s /root/mcs.sh /usr/bin/mcs && \
     ln -s /root/fn.sh /usr/bin/fn && \
+    sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" && \
     source /etc/profile
 
 # Clean system and reduce size
