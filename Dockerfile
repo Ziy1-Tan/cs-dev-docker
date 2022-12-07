@@ -56,10 +56,6 @@ COPY scripts/pre.sh \
     scripts/fn.sh \
     scripts/install.sh /root/
 
-COPY .ssh /root/.ssh/ 
-
-
-
 # Chmod some files
 RUN chmod +x /usr/bin/columnstore-init \
     /usr/bin/columnstore-start \
