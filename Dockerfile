@@ -40,9 +40,7 @@ RUN dnf -y install bind-utils \
     policycoreutils \
     mariadb-gssapi-server && \
     ln -s /usr/lib/lsb/init-functions /etc/init.d/functions && \
-    rm -rf /usr/share/zoneinfo/tzdata.zi /usr/share/zoneinfo/leapseconds && \
-    git config --global user.name "qggcs" && \                      
-    git config --global user.email "ajb459684460@gmail.com"
+    rm -rf /usr/share/zoneinfo/tzdata.zi /usr/share/zoneinfo/leapseconds 
 
 # If systemd is not supported
 COPY scripts/columnstore-init \
