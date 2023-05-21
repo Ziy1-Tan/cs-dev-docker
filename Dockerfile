@@ -6,67 +6,39 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo 'Asia/Shanghai' >/etc/timezone
 
 # Prepare image
-RUN dnf -y install wget && \
-    dnf -y install epel-release && \
+RUN dnf -y install epel-release && \
     dnf -y upgrade --refresh
 
 # Install some basic dependencies
 RUN dnf -y install bind-utils \
-    bc \
-    boost \
-    expect \
-    glibc-langpack-en \
-    jemalloc \
-    jq \
-    less \
-    libaio \
-    monit \
-    nano \
+    dnf-utils \
     net-tools \
     openssl \
-    perl \
-    perl-DBI \
     procps-ng \
-    redhat-lsb-core \
-    rsyslog \
-    snappy \
-    tcl \
-    tini \
-    tzdata \
     python3 \
     zsh \
     git \
-    vim \
-    policycoreutils \
-    mariadb-gssapi-server && \
-    ln -s /usr/lib/lsb/init-functions /etc/init.d/functions && \
-    rm -rf /usr/share/zoneinfo/tzdata.zi /usr/share/zoneinfo/leapseconds 
+    policycoreutils
 
-# If systemd is not supported
-COPY scripts/columnstore-init \
-    scripts/columnstore-start \
-    scripts/columnstore-stop \
-    scripts/columnstore-restart /usr/bin/
+RUN yum -y groupinstall "Development Tools" && \
+    yum config-manager --set-enabled powertools && \
+    yum install -y checkpolicy cmake && \
+    yum -y install bison ncurses-devel readline-devel perl-devel openssl-devel libxml2-devel gperf libaio-devel libevent-devel tree pam-devel snappy-devel libicu && \
+    yum -y install vim wget strace ltrace gdb rsyslog net-tools openssh-server expect boost perl-DBI libicu boost-devel initscripts && \
+    yum -y install jemalloc-devel libcurl-devel gtest-devel cppunit-devel systemd-devel lzo-devel xz-devel lz4-devel bzip2-devel && \
+    yum -y install pcre2-devel flex graphviz && \
+    yum -y install gcc-toolset-12
 
-COPY scripts/pre.sh \
-    scripts/mcs.sh \
-    config/.vimrc \
-    scripts/fn.sh \
-    scripts/install.sh /root/
 
-# Chmod some files
-RUN chmod +x /usr/bin/columnstore-init \
-    /usr/bin/columnstore-start \
-    /usr/bin/columnstore-stop \
-    /usr/bin/columnstore-restart \
-    /root/pre.sh \
-    /root/mcs.sh \
-    /root/fn.sh \
-    /root/install.sh && \
-    ln -s /root/mcs.sh /usr/bin/mcs && \
-    ln -s /root/fn.sh /usr/bin/fn && \
-    sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" && \
-    source /etc/profile
+
+RUN sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+
+COPY config/.vimrc \
+    config/.zshrc \
+    scripts/install_deps.sh \ 
+    scripts/mcs.sh \ 
+    scripts/fixup.sh \
+    /root/
 
 # Clean system and reduce size
 RUN dnf clean all && \

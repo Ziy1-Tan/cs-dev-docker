@@ -40,4 +40,4 @@ yum -y install epel-release &&
         bzip2-devel \
         cmake \
         checkpolicy \
-        gcc-toolset-11 
+        gcc-toolset-12
