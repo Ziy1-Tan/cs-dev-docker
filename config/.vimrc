@@ -16,22 +16,18 @@ set t_Co=256
 set tabstop=2
 set softtabstop=2
 set shiftwidth=4
-
+set scrolloff=5
 
 syntax on
 filetype indent on
 
 " key mapping
-
-nmap <leader>wq :wq<CR> 
-nmap <leader>q :q<CR>
-nmap nh :nohlsearch<CR>
-
+let mapleader=' '
 
 inoremap jj <esc>
+nnoremap J 5j
+nnoremap K 5k
 
-nnoremap <leader>w <c-w>w
-nnoremap <leader>h <c-w>h
-nnoremap <leader>j <c-w>j
-nnoremap <leader>k <c-w>k
-nnoremap <leader>l <c-w>l
+nnoremap <leader>wq :wq<CR>
+nnoremap <leader>q :q<CR>
+nnoremap <Backspace> :nohl<CR>

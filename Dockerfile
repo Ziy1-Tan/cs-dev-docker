@@ -21,6 +21,7 @@ RUN dnf -y install epel-release && \
     clang \
     policycoreutils
 
+# Install Columnstor build dependencies
 RUN yum -y groupinstall "Development Tools" \
     && yum config-manager --set-enabled powertools \
     && yum install -y checkpolicy \
@@ -65,12 +66,28 @@ RUN yum -y groupinstall "Development Tools" \
     bzip2-devel \
     pcre2-devel \
     flex \
-    graphviz
+    graphviz \
+    gcc-toolset-12
 
+# Install Oh My Zsh
 RUN sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" --unattended
 
+# Copy config files & scripts
 COPY config /root/
-COPY scripts /root/
+
+COPY scripts/install_deps \
+    scripts/mcs-status \
+    scripts/mcs-start \
+    scripts/mcs-stop \
+    scripts/mcs-restart /usr/bin/
+
+# Make scripts executable
+RUN chmod +x /usr/bin/install_deps \
+    /usr/bin/mcs-status \
+    /usr/bin/mcs-start \
+    /usr/bin/mcs-stop \
+    /usr/bin/mcs-restart
+
 
 # Clean system and reduce size
 RUN dnf clean all && \

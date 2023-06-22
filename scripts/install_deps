@@ -1,3 +1,5 @@
+#!/bin/sh
+
 yum -y install epel-release &&
     yum -y groupinstall "Development Tools" &&
     yum config-manager --set-enabled powertools &&
