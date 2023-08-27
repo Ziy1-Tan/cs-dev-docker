@@ -70,7 +70,7 @@ RUN yum -y groupinstall "Development Tools" \
     gcc-toolset-12
 
 # Install Oh My Zsh
-RUN sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" --unattended
+# RUN sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" --unattended
 
 # Copy config files & scripts
 COPY config /root/
