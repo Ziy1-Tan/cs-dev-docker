@@ -1,6 +1,0 @@
-#!/bin/sh
-
-# mkdir before start mariadb server
-
-mkdir -p /run/mysqld && chown -R mysql:mysql /run/mysqld
-mkdir -p /run/mariadb && chown -R mysql:mysql /run/mariadb

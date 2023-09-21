@@ -15,7 +15,6 @@ RUN dnf -y install epel-release && \
     openssl \
     procps-ng \
     python3 \
-    zsh \
     git \
     clang-tools-extra \
     clang \
@@ -67,7 +66,6 @@ RUN yum -y groupinstall "Development Tools" \
     pcre2-devel \
     flex \
     graphviz \
-    gcc-toolset-11 \
     gcc-toolset-12
 
 # Copy config files & scripts

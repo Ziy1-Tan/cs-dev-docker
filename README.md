@@ -3,7 +3,6 @@
 ## Contents
 
 - Dockerfile
-- zsh config
 - vim config
 - scripts for start service and install dependencies
 
@@ -19,5 +18,5 @@ docker run --privileged -d --name='cs-dev' \
   columnstore-dev:rockylinux-8 /usr/sbin/init
 docker exec -it -w /root/server/storage/columnstore/columnstore/build cs-dev /bin/bash
 git checkout develop
-. /opt/rh/gcc-toolset-12/enable && ./bootstrap_mcs.sh -D -t Debug -d Rocky
+. /opt/rh/gcc-toolset-12/enable && ./bootstrap_mcs.sh
 ```
