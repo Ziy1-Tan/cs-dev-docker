@@ -66,6 +66,7 @@ RUN yum -y groupinstall "Development Tools" \
     pcre2-devel \
     flex \
     graphviz \
+    gcc-toolset-11 \
     gcc-toolset-12
 
 # Copy config files & scripts
@@ -77,12 +78,15 @@ COPY scripts/install_deps \
     scripts/mcs-stop \
     scripts/mcs-restart /usr/bin/
 
+COPY scripts/do_cmake.sh /root/
+
 # Make scripts executable
 RUN chmod +x /usr/bin/install_deps \
     /usr/bin/mcs-status \
     /usr/bin/mcs-start \
     /usr/bin/mcs-stop \
-    /usr/bin/mcs-restart
+    /usr/bin/mcs-restart \
+    /root/do_cmake.sh
 
 
 # Clean system and reduce size

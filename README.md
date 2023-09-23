@@ -20,3 +20,15 @@ docker exec -it -w /root/server/storage/columnstore/columnstore/build cs-dev /bi
 git checkout develop
 . /opt/rh/gcc-toolset-12/enable && ./bootstrap_mcs.sh
 ```
+
+## issues
+
+```shell
+# reinstall mysql data
+rm -rf /var/lib/mysql
+chown -R mysql:mysql /var/lib/mysql
+mysql_install_db --user=mysql
+# remove unused plugins
+rm -rf /etc/my.cnf.d/auth_gssapi.cnf
+rm -rf /etc/my.cnf.d/provider_*
+```
