@@ -6,7 +6,7 @@ Dev Container for MariaDB ColumnStore
 2. Vim config
 3. Scripts for service & dependencies
 
-# 1. Quick Start
+# Quick Start
 
 ```shell
 # 1. Clone the repository
