@@ -66,7 +66,6 @@ RUN yum -y groupinstall "Development Tools" \
     pcre2-devel \
     flex \
     graphviz \
-    gcc-toolset-11 \
     gcc-toolset-12
 
 # Copy config files & scripts
